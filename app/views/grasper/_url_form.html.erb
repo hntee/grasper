@@ -1,0 +1,20 @@
+<!-- <form action="/grasp" method="post">
+  <input type="text" name="url" autofocus><br>
+  <input type="submit" class="btn btn-primary" value="Submit">
+</form> -->
+
+
+<%= form_for([@article, @article.comments.build]) do |f| %>
+  <p>
+    <%= f.label :commenter %><br>
+    <%= f.text_field :commenter %>
+  </p>
+  <p>
+    <%= f.label :body %><br>
+    <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+  
+<% end %>
