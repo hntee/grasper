@@ -3,9 +3,11 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   root 'grasper#index'
 
-  resources :topics
+  # resources :topics
 
-  post '/' => 'grasper#grasp'
+  # post '/' => 'grasper#grasp'
+  get '/foo' => 'grasper#foo'
+  get '/download' => 'grasper#download'
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
