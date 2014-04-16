@@ -1,6 +1,7 @@
 class GrasperController < ApplicationController
   require 'nokogiri'
   require 'open-uri'
+  # require 'pry'
   include GrasperHelper
   include TestHelper
 
@@ -8,10 +9,16 @@ class GrasperController < ApplicationController
   end
 
   def parse
-    url = "http://www.douban.com/group/topic/18524871/"
-    topic = Topic.new url
-    @text = topic.author_posts.join
-    send_data @text,  :filename => "yea.txt" 
+    url    = params[:url]
+    topic  = Topic.new url#, :parse_pages => 0..1
+    # @text = topic.author_posts#.join
+    @text =  "#{topic.title} / #{topic.author}\n"
+    @text << "#{topic.url}"
+    @text << "\n\n---------\n\n"
+    @text << topic.author_posts.join("\n\n")
+    # @shit = topic.pages_url
+    # send_data @text,  :filename => "#{title}.txt" 
+
   end
 
   def download
