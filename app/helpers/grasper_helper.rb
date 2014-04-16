@@ -2,39 +2,39 @@
 
 module GrasperHelper
 
-
   module Parse
     def parse
       html = open(@url).read
 
-      # correct the encoding
-      html.force_encoding("gbk")
-      html.encode!("utf-8")
+      # correct the encoding (only for some websites)
+      # html.force_encoding("gbk")
+      # html.encode!("utf-8")
 
       # parse the html with nokogiri
       Nokogiri::HTML.parse html
     end
+
   end
 
   class Post
-    attr_reader :content, :author
+    attr_reader :content, :author, :post
 
     def initialize post, selector = {}
-      # selector only for cl.man.lv
-      selector[:author_selector]  ||= 'tr.tr1 th.r_two b'
-      selector[:content_selector] ||= 'div.tpc_content'
+
+      selector[:author_selector]  ||= 'a'
+      selector[:content_selector] ||= 'p'
       @post = post
       get_author selector[:author_selector]
       get_content selector[:content_selector]
     end
 
     def get_author author_selector
-      @author = @post.css(author_selector)[0].text
+      @author ||= @post.css(author_selector)[0].text
     end
 
     def get_content content_selector
       @content = @post.css(content_selector).text
-      @content.gsub!(/\s+|　/,"\n")
+      @content.gsub!(/\r/,"\n\n")
     end
   end
 
@@ -44,7 +44,7 @@ module GrasperHelper
     include Parse
 
     def initialize url, selector = {}
-      selector[:post_selector] ||= 'div.t.t2'
+      selector[:post_selector] ||= 'div.topic-doc, div.reply-doc.content'
       @url = url
       puts "parsing #{@url}"
       @doc = self.parse
@@ -58,13 +58,13 @@ module GrasperHelper
   end
 
   class Topic
-    attr_reader :url, :author, :pages_url, :pages, :author_posts
+    attr_reader :url, :author, :pages_url, :pages, :author_posts, :doc
 
     include Parse
 
     def initialize url, option = {}
-      option[:author_selector] ||= 'tr.tr1 th.r_two b'
-      option[:page_selector]   ||= 'div.pages a'
+      option[:author_selector] ||= 'div.topic-doc a'
+      option[:page_selector]   ||= 'div.paginator>a'
       option[:parse_pages]     ||= 0..1
       @url   = url
       puts "url initialized"
@@ -78,28 +78,31 @@ module GrasperHelper
     end
 
     def get_author author_selector
-      @author ||= @doc.css(author_selector)[0].text
-    end
-
-    def get_pages_url page_selector
-      # add url of the first page
-      @pages_url << url
-
-      # only for cl.man.lv
-      # => "read.php?tid=1063468&page=194" 
-      max_page_url = @doc.css('div.pages a').last.attributes['href'].value.
-                     gsub('../','') 
-                     
-      max_page = max_page_url.match(/\d+$/).to_s.to_i # => 194
-
-      (2..max_page).each do |i|
-        @pages_url << url.match(/.*\.[a-zA-z]+\//).to_s + # http://example.com/
-                      max_page_url.sub(/\d+$/,i.to_s)
+      if @doc.css(author_selector)[0].text
+        @author ||= @doc.css(author_selector)[0].text
+      else
+        binding.pry
       end
     end
 
-    def parse_pages range = 0
+    def get_pages_url page_selector
+
+      pages_url << url
+
+      # <a href="http://www.douban.com/group/topic/18524871/?start=12400">125</a>
+      max_page = @doc.css(page_selector).last.text.to_i
+      # => 125 
+
+      (1..max_page - 1).each do |i| # 1..124
+        @pages_url << url+"?start=#{i}00"
+      end
+    end
+
+    def parse_pages range
+       
       @pages ||= pages_url[range].collect { |page_url| Page.new page_url }
+       
+
     end
 
     def get_author_posts
@@ -111,6 +114,17 @@ module GrasperHelper
       end
     end
   end
+
+  # th = Topic.new "http://www.douban.com/group/topic/18524871/", parse_pages: 0..4
+  # binding.pry
+  #  
+  # File.open("atest.txt", 'w') do |file| 
+  #   # file.write th.author_posts[0] 
+  #   th.author_posts.each do |post|
+  #     file.write post
+  #   end
+  # end
+
 
 end
 
