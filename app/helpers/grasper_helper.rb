@@ -1,5 +1,3 @@
-
-
 module GrasperHelper
 
   module Parse
@@ -78,31 +76,22 @@ module GrasperHelper
     end
 
     def get_author author_selector
-      if @doc.css(author_selector)[0].text
-        @author ||= @doc.css(author_selector)[0].text
-      else
-        binding.pry
-      end
+      @author ||= @doc.css(author_selector)[0].text
     end
 
     def get_pages_url page_selector
-
-      pages_url << url
 
       # <a href="http://www.douban.com/group/topic/18524871/?start=12400">125</a>
       max_page = @doc.css(page_selector).last.text.to_i
       # => 125 
 
-      (1..max_page - 1).each do |i| # 1..124
+      (0..max_page - 1).each do |i| # 1..124
         @pages_url << url+"?start=#{i}00"
       end
     end
 
     def parse_pages range
-       
       @pages ||= pages_url[range].collect { |page_url| Page.new page_url }
-       
-
     end
 
     def get_author_posts

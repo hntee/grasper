@@ -7,17 +7,14 @@ class GrasperController < ApplicationController
   def index
   end
 
-  def foo
-    # @url = params[:url]
-    # @foo = parse_a 'http://guides.rubyonrails.org/'
-    @foo = Topic.new "http://cl.man.lv/htm_data/20/1404/1063468.html"
-    @text = @foo.author_posts.join
-    content = @text
-    send_data content,  :filename => "bacon.txt" 
+  def parse
+    url = "http://www.douban.com/group/topic/18524871/"
+    topic = Topic.new url
+    @text = topic.author_posts.join
+    send_data @text,  :filename => "yea.txt" 
   end
 
   def download
-    content = "chunky bacon\r\nis awesome"
-    send_data content,  :filename => "bacon.txt" 
+    send_data @text,  :filename => "yea.txt" 
   end
 end

@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   # resources :topics
 
   # post '/' => 'grasper#grasp'
-  get '/foo' => 'grasper#foo'
+  get '/grasp' => 'grasper#grasp'
+  get '/parse' => 'grasper#parse'
   get '/download' => 'grasper#download'
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
