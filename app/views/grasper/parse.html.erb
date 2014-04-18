@@ -1,2 +1,2 @@
-<%= link_to 'Download', download_path %>
+<%= link_to 'Download', :action => :download, :filename => "#{@topic.title}.txt" %>
 <%= simple_format(@text) %>
