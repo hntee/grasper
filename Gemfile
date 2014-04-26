@@ -6,7 +6,8 @@ gem 'nokogiri'
 gem 'rails', '4.1.0'
 # Use sqlite3 as the database for Active Record
 group :development, :test do # <<<< :development, not devlopment
-  gem 'sqlite3'
+  gem 'mongoid', '~> 4', github: 'mongoid/mongoid'
+  gem 'bson_ext'
 end
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
