@@ -6,6 +6,7 @@ gem 'nokogiri'
 gem 'rb-readline'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
+gem 'foundation-rails'
 
 group :development, :test do # <<<< :development, not devlopment
   gem 'sqlite3'

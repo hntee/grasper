@@ -124,16 +124,6 @@ module GrasperHelper
     end
   end
 
-  # th = Topic.new "http://www.douban.com/group/topic/18524871/", parse_pages: 0..4
-  # binding.pry
-  #  
-  # File.open("atest.txt", 'w') do |file| 
-  #   # file.write th.author_posts[0] 
-  #   th.author_posts.each do |post|
-  #     file.write post
-  #   end
-  # end
-
 
 end
 

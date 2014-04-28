@@ -1,0 +1,25 @@
+// Place all the styles related to the article controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+h3 {
+	margin: 20px;
+	// background: #444;
+	// margin-bottom:20px !important;
+}
+
+p>a {
+	padding-right: 10px;
+}
+
+.topic {
+	margin: 0 auto;
+	margin-top: 20px;
+	max-width: 700px;
+	.content {
+		margin-top:20px;
+		p {
+			margin-top: 8px;
+		}
+	}
+}
+

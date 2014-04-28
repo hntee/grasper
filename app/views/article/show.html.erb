@@ -1,0 +1,11 @@
+<div class="topic">
+<h3><%= @article.title %>
+<small>
+  <%= link_to '下载', download_path(@article), target: "_blank" %> 
+  <%= link_to '原帖', @article.url , target: "_blank"%>
+</small></h3>
+
+<div class="content">
+  <%= simple_format(@article.content) %>
+</div>
+</div>

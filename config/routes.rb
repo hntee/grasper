@@ -1,15 +1,14 @@
 Rails.application.routes.draw do
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   root 'grasper#index'
 
   # resources :topics
 
-  # post '/' => 'grasper#grasp'
-  get '/grasp' => 'grasper#grasp'
   post '/parse' => 'grasper#parse'
-  get '/download/:id', to: 'grasper#download', as: 'download'
-  get '/article/:id', to: 'grasper#show', as: 'article' 
+  get  '/download/:id' , to: 'article#download' , as: 'download'
+  get  '/articles/:id' , to: 'article#show'     , as: 'articles'
   # root 'welcome#index'
 
   # Example of regular route:

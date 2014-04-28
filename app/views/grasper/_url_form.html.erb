@@ -1,7 +1,10 @@
 
+
+<div class="search">
 <%= form_tag("/parse", method: "post") do %>
-  <%= label_tag(:url, "Thread URL:") %>
+  <%= label_tag(:url, "Douban Topic URL:") %>
   <br>
   <%= text_field_tag(:url) %>
-  <%= button_tag("Parse") %>
+  <%= button_tag("Parse", class: "button" )%>
 <% end %>
+</div>
