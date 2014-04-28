@@ -9,7 +9,7 @@ class GrasperController < ApplicationController
 
   def parse
     url    = params[:url]
-    @topic  = Topic.new url, :parse_pages => 0..1
+    @topic  = Topic.new url#, :parse_pages => 0..1
 
     content = @topic.author_posts.join("\n\n")
 
