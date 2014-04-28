@@ -1,5 +1,2 @@
-class Article
-  include Mongoid::Document
-  field :title, type: String
-  field :content, type: String
+class Article < ActiveRecord::Base
 end
