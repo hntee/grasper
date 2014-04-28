@@ -1,12 +1,14 @@
-source 'http://ruby.taobao.org'
+source 'https://rubygems.org'
 
 gem 'pry', :group => :development
 gem 'nokogiri'
+gem 'rb-readline'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
+gem 'sqlite3'
 # Use sqlite3 as the database for Active Record
 group :development, :test do # <<<< :development, not devlopment
-  gem 'mongoid', '~> 4', github: 'mongoid/mongoid'
+  gem 'mongoid', '~> 4.0.0.beta1', git: 'https://github.com/mongoid/mongoid.git'
   gem 'bson_ext'
 end
 # Use SCSS for stylesheets

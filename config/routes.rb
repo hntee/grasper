@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   # post '/' => 'grasper#grasp'
   get '/grasp' => 'grasper#grasp'
   post '/parse' => 'grasper#parse'
-  get '/download' => 'grasper#download'
-  # You can have the root of your site routed with "root"
+  get '/download/:id', to: 'grasper#download', as: 'download'
+  get '/article/:id', to: 'grasper#show', as: 'article' 
   # root 'welcome#index'
 
   # Example of regular route:
