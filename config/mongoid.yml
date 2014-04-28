@@ -24,7 +24,7 @@ development:
 production:
   sessions:
     default:
-      uri: mongodb://test:test@oceanic.mongohq.com:10055/grasper_db
+      uri: <%= ENV['MONGOHQ_URL'] %>
       options:
         consistency: :strong
         max_retries: 1
