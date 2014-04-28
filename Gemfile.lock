@@ -82,7 +82,6 @@ GEM
       mini_portile (~> 0.5.0)
     optionable (0.2.0)
     origin (2.1.1)
-    pg (0.17.1)
     polyglot (0.3.4)
     pry (0.9.12.6)
       coderay (~> 1.0)
@@ -155,7 +154,6 @@ DEPENDENCIES
   jquery-rails
   mongoid (~> 4.0.0.beta1)!
   nokogiri
-  pg
   pry
   rails (= 4.1.0)
   rb-readline
