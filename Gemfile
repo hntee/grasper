@@ -7,10 +7,10 @@ gem 'rb-readline'
 gem 'rails', '4.1.0'
 # gem 'sqlite3'
 # Use sqlite3 as the database for Active Record
-group :development, :test do # <<<< :development, not devlopment
+# group :development, :test do # <<<< :development, not devlopment
   gem 'mongoid', '~> 4.0.0.beta1', git: 'https://github.com/mongoid/mongoid.git'
   gem 'bson_ext'
-end
+# end
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
