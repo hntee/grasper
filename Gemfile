@@ -9,8 +9,7 @@ gem 'rails', '4.1.0'
 # gem 'sqlite3'
 # Use sqlite3 as the database for Active Record
 # group :development, :test do # <<<< :development, not devlopment
-  gem 'mongoid', '~> 4.0.0.beta1', git: 'https://github.com/mongoid/mongoid.git'
-  gem 'bson_ext'
+
 # end
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
@@ -44,8 +43,7 @@ gem 'spring',        group: :development
 
 # Use debugger
 # # gem 'debugger', group: [:development, :test]
-group :production do
-  # gem 'pg'
-  gem 'mongoid', '~> 4.0.0.beta1', git: 'https://github.com/mongoid/mongoid.git'
-  gem 'bson_ext'
-end
+gem 'pg'
+gem 'mongoid', '~> 4.0.0.beta1', git: 'https://github.com/mongoid/mongoid.git'
+gem 'bson_ext'
+
